@@ -22,6 +22,7 @@ public class ProyectoFinal {
         
           Interfaz i = new Interfaz();
             i.interfazAcceso();
+         //   i.interfazRegistro();
        //   i.interfazPrincipal();
       //    i.interfazAltaEquipo();
       //    i.InterfazAltaJugador();

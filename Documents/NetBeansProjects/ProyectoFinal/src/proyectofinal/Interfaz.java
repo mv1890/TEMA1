@@ -20,11 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
 /**
  *
  * @author Marc
  */
-
 
 public class Interfaz {
 
@@ -65,13 +65,13 @@ public class Interfaz {
     JTextField nombreJugadorBaja = new JTextField(20);
     JButton btnAceptarBaja = new JButton("Aceptar");
     JButton btnCancelarBaja = new JButton("Cancelar");
-    
+
     //MENU MODIFICAR JUGADOR
     JFrame frameModificarJugador = new JFrame();
     JPanel panelModificarJugador = new JPanel();
     static JComboBox comboboxJugador = new JComboBox();
     JButton btnprueba = new JButton();
-    
+
     //MENU ALTA EQUIPO
     JFrame frameAltaEquipo = new JFrame();
     JPanel panelAltaEquipo = new JPanel();
@@ -102,6 +102,16 @@ public class Interfaz {
     JButton btnAceptarAcceso = new JButton("Acceder");
     JButton btnRegistrarAcceso = new JButton("Registro");
 
+    //MENU REGISTRO
+    JFrame frameRegistro = new JFrame();
+    JPanel panelRegistro = new JPanel();
+    JLabel labelRegistroNombre = new JLabel("Nombre: ");
+    JLabel labelRegistroContraseña = new JLabel("Contraseña: ");
+    JLabel labelRegistroTitulo = new JLabel("Registro");
+    JTextField nombreRegistro = new JTextField(20);
+    JTextField contraseñaRegistro = new JTextField(20);
+    JButton btnAceptarRegistro = new JButton("Aceptar");
+
     public void interfazAcceso() {
         GridLayout layoutAcceso = new GridLayout(3, 2);
         frameAcceso.setLayout(new BorderLayout());
@@ -126,7 +136,7 @@ public class Interfaz {
                 login lg = new login();
                 try {
                     lg.recuperarDatosContacto(nombreAcceso.getText(), contraseñaAcceso.getText());
-                    
+
                 } catch (SQLException ex) {
                     Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -134,9 +144,33 @@ public class Interfaz {
                 }
             }
         });
+         btnRegistrarAcceso.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                interfazRegistro();
+            }
+        });
 
     }
 
+    public void interfazRegistro() {
+        GridLayout layoutRegistro = new GridLayout(4, 2);
+        frameAcceso.setLayout(new BorderLayout());
+        frameRegistro.add(panelRegistro);
+        panelAcceso.setLayout(layoutRegistro);
+        panelRegistro.add(labelRegistroTitulo);
+        panelRegistro.add(labelRegistroNombre);
+        panelRegistro.add(nombreRegistro);
+        panelRegistro.add(labelRegistroContraseña);
+        panelRegistro.add(contraseñaRegistro);
+        panelRegistro.add(btnAceptarRegistro);
+
+        frameRegistro.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frameRegistro.pack();
+        frameRegistro.setVisible(true);
+        frameRegistro.setSize(200, 300);
+    }
+    
     public void interfazPrincipal() {
 
         framePrincipal.add(panelPrincipal);
@@ -147,7 +181,7 @@ public class Interfaz {
         panelPrincipal.add(btnModificar);
         framePrincipal.add(tabs);
         tabs.add("Equipo", interfazAltaEquipo());
-     //   tabs.add("Jugador", interfazModificarJugador());
+        //   tabs.add("Jugador", interfazModificarJugador());
 
         //       tabs.add("Jugador", InterfazAltaJugador());
         framePrincipal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -239,26 +273,26 @@ public class Interfaz {
         panelBajaJugador.add(dniJugadorBaja);
         panelBajaJugador.add(labelNombreJugadorBaja);
         panelBajaJugador.add(nombreJugadorBaja);
-        
+
         frameBajaJugador.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frameAltaJugador.pack();
         frameAltaJugador.setVisible(true);
 
         return panelBajaJugador;
     }
-    
-    public JPanel interfazModificarJugador() throws SQLException, ClassNotFoundException{
-        
+
+    public JPanel interfazModificarJugador() throws SQLException, ClassNotFoundException {
+
         frameModificarJugador.setLayout(new BorderLayout());
         frameModificarJugador.add(panelModificarJugador);
         panelModificarJugador.add(comboboxJugador);
         Gestion g = new Gestion();
         g.modificarJugador();
-        
+
         frameModificarJugador.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frameModificarJugador.pack();
         frameModificarJugador.setVisible(true);
-        
+
         return panelModificarJugador;
     }
 
@@ -291,7 +325,7 @@ public class Interfaz {
         btnAceptarAltaEquipo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+
                 try {
                     Gestion g = new Gestion();
                     g.altaEquipo(nombreEquipoAlta.getText(), estadioEquipoAlta.getText(), localidadEquipoAlta.getText(), Float.parseFloat(presupuestoEquipoAlta.getText()), Integer.parseInt(golesFavorEquipoAlta.getText()), Integer.parseInt(golesContraEquipoAlta.getText()), ligaEquipoAlta.getText());
